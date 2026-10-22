@@ -38,8 +38,11 @@ export default async function handler(req, res) {
 
   const { RESEND_API_KEY, CONTACT_TO_EMAIL } = process.env
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL) {
-    console.error('Missing RESEND_API_KEY or CONTACT_TO_EMAIL')
-    return res.status(500).json({ error: 'The contact form is not configured yet. Please email me directly.' })
+    const missing = [!RESEND_API_KEY && 'RESEND_API_KEY', !CONTACT_TO_EMAIL && 'CONTACT_TO_EMAIL'].filter(Boolean)
+    console.error(`Missing env vars: ${missing.join(', ')} (VERCEL_ENV=${process.env.VERCEL_ENV})`)
+    return res
+      .status(500)
+      .json({ error: `The contact form is not configured yet (missing ${missing.join(', ')}). Please email me directly.` })
   }
 
   try {
