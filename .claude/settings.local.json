@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node -v)",
+      "PowerShell(npm -v)",
+      "PowerShell(npm install)",
+      "PowerShell(npm run build)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ricky\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-ricky-Desktop-my-portfolio\\\\5994984d-6afb-430e-b0aa-95c99c0ebd50\\\\images\" | Select-Object Name, @{n='KB';e={[math]::Round\\($_.Length/1KB\\)}})"
+    ]
+  }
+}
