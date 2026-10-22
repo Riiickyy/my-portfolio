@@ -36,7 +36,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Your message should be between 10 and 5,000 characters.' })
   }
 
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL } = process.env
+  const RESEND_API_KEY = cleanEnv(process.env.RESEND_API_KEY)
+  const CONTACT_TO_EMAIL = cleanEnv(process.env.CONTACT_TO_EMAIL)
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL) {
     const missing = [!RESEND_API_KEY && 'RESEND_API_KEY', !CONTACT_TO_EMAIL && 'CONTACT_TO_EMAIL'].filter(Boolean)
     console.error(`Missing env vars: ${missing.join(', ')} (VERCEL_ENV=${process.env.VERCEL_ENV})`)
@@ -56,7 +57,7 @@ export default async function handler(req, res) {
     })
 
     if (error) {
-      console.error('Resend error:', error)
+      console.error('Resend error:', error, `(CONTACT_TO_EMAIL is ${JSON.stringify(CONTACT_TO_EMAIL)})`)
       return res.status(502).json({ error: 'Could not send your message. Please try again later.' })
     }
 
@@ -65,6 +66,14 @@ export default async function handler(req, res) {
     console.error('Contact handler failed:', err)
     return res.status(500).json({ error: 'Could not send your message. Please try again later.' })
   }
+}
+
+// Dashboard-pasted values often carry stray whitespace or quotes
+function cleanEnv(value) {
+  return String(value || '')
+    .trim()
+    .replace(/^["']|["']$/g, '')
+    .trim()
 }
 
 function safeParse(text) {
