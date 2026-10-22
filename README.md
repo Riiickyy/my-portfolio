@@ -9,12 +9,11 @@ npm install
 npm run dev
 ```
 
-The site runs at http://localhost:5173. The contact form needs the API, so to test it locally:
+The site runs at http://localhost:5173. The contact form works locally too: `npm run dev` serves `api/contact.js` using the values in `.env.local`:
 
 ```bash
-npm i -g vercel
 cp .env.example .env.local   # then fill in your Resend key and email
-vercel dev
+npm run dev
 ```
 
 ## Edit content
