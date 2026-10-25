@@ -5,13 +5,15 @@ import { caseStudies } from '../data/caseStudies.js'
 
 export default function CaseStudies({ onOpen }) {
   return (
-    <section className="section section--tint" id="case-studies">
+    <section className="section zone--night" id="case-studies">
       <div className="container">
-        <Reveal className="section-head">
-          <span className="eyebrow">Case Studies</span>
-          <h2>
-            From landing pages to <span className="accent">complete customer journeys.</span>
-          </h2>
+        <Reveal className="section-head section-head--split">
+          <div>
+            <span className="eyebrow">03 / Case Studies</span>
+            <h2>
+              From landing pages to <span className="accent">complete customer journeys.</span>
+            </h2>
+          </div>
           <p>Projects where I worked across strategy, design, funnels and automation to solve different business goals.</p>
         </Reveal>
 
@@ -22,8 +24,8 @@ export default function CaseStudies({ onOpen }) {
           viewport={{ once: true, margin: '-80px' }}
           variants={gridVariants}
         >
-          {caseStudies.map((c) => (
-            <WorkCard key={c.id} item={c} onOpen={onOpen} />
+          {caseStudies.map((c, i) => (
+            <WorkCard key={c.id} item={c} index={i} enter="scale" onOpen={onOpen} />
           ))}
         </motion.div>
       </div>

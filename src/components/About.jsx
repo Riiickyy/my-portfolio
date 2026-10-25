@@ -1,32 +1,34 @@
 import { motion } from 'motion/react'
 import Reveal from './Reveal.jsx'
 import Img from './Img.jsx'
+import CountUp from './CountUp.jsx'
 import { site } from '../data/site.js'
 
 // Quick facts, taken from the case studies. Swap in other numbers any time.
+// Facts with `count` animate up from zero when they scroll into view.
 const facts = [
   { value: 'BSIT', label: 'IT graduate' },
-  { value: '₱800K', label: 'Client sales from one funnel' },
-  { value: '50+', label: 'Event seats filled' },
+  { count: { value: 800, prefix: '₱', suffix: 'K' }, label: 'Client sales from one funnel' },
+  { count: { value: 50, suffix: '+' }, label: 'Event seats filled' },
 ]
 
 export default function About() {
   return (
-    <section className="section" id="about">
+    <section className="section zone--paper" id="about">
       <div className="container about__grid">
         <motion.div
           className="about__photo"
-          initial={{ opacity: 0, scale: 0.92 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ clipPath: 'inset(0% 100% 0% 0%)' }}
+          whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+          transition={{ duration: 1, ease: [0.7, 0, 0.2, 1] }}
         >
           <Img src={site.aboutPhoto} alt={`${site.name} at work`} label="Add about.jpg" />
         </motion.div>
 
         <div className="about__text">
           <Reveal>
-            <span className="eyebrow">About Me</span>
+            <span className="eyebrow">05 / About Me</span>
             <h2>
               I like solving the journey, <span className="accent">not just designing the page.</span>
             </h2>
@@ -50,7 +52,7 @@ export default function About() {
           <div className="about__facts">
             {facts.map((f, i) => (
               <Reveal key={f.label} delay={0.2 + i * 0.08} className="about__fact">
-                <strong>{f.value}</strong>
+                <strong>{f.count ? <CountUp {...f.count} /> : f.value}</strong>
                 <span>{f.label}</span>
               </Reveal>
             ))}

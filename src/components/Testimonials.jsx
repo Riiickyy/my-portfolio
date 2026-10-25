@@ -5,10 +5,10 @@ import { testimonials } from '../data/testimonials.js'
 // A two-column grid on desktop; on phones the CSS turns it into a swipeable row.
 export default function Testimonials() {
   return (
-    <section className="section section--tint" id="testimonials">
+    <section className="section zone--neon" id="testimonials">
       <div className="container">
-        <Reveal className="section-head">
-          <span className="eyebrow">Testimonials</span>
+        <Reveal className="section-head section-head--center">
+          <span className="eyebrow">04 / Testimonials</span>
           <h2>
             What my <span className="accent">clients say.</span>
           </h2>
@@ -20,8 +20,8 @@ export default function Testimonials() {
               key={t.name}
               className="quote"
               style={{ margin: 0 }}
-              initial={{ opacity: 0, y: 40, rotate: i % 2 ? 1.5 : -1.5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+              initial={{ opacity: 0, x: i % 2 ? 60 : -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
               whileHover={{ y: -6 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: [0.2, 0.8, 0.2, 1] }}

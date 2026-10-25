@@ -38,11 +38,13 @@ export default function Contact() {
   }
 
   return (
-    <section className="section" id="contact">
+    <section className="section contact zone--night" id="contact">
       <div className="container">
         <Reveal className="contact__box">
           <div className="contact__intro">
-            <span className="eyebrow">Available for new projects</span>
+            <span className="eyebrow">
+              <span className="pulse" aria-hidden /> 06 / Available for new projects
+            </span>
             <h2>Let’s build something that works for your business.</h2>
             <p>
               Whether you need a new website, a landing page that converts or help with the funnel behind it, tell me

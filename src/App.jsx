@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import TechStrip from './components/TechStrip.jsx'
+import Services from './components/Services.jsx'
 import Projects from './components/Projects.jsx'
 import CaseStudies from './components/CaseStudies.jsx'
 import Testimonials from './components/Testimonials.jsx'
@@ -20,6 +21,7 @@ export default function App() {
       <main>
         <Hero />
         <TechStrip />
+        <Services />
         <Projects onOpen={setSelected} />
         <CaseStudies onOpen={setSelected} />
         <Testimonials />

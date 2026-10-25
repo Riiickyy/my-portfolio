@@ -5,10 +5,10 @@ import { projects } from '../data/projects.js'
 
 export default function Projects({ onOpen }) {
   return (
-    <section className="section" id="projects">
+    <section className="section zone--paper" id="projects">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">Featured Projects</span>
+          <span className="eyebrow">02 / Featured Projects</span>
           <h2>
             Recent <span className="accent">websites.</span>
           </h2>
@@ -16,14 +16,14 @@ export default function Projects({ onOpen }) {
         </Reveal>
 
         <motion.div
-          className="cards"
+          className="cards cards--stagger"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-80px' }}
           variants={gridVariants}
         >
-          {projects.map((p) => (
-            <WorkCard key={p.id} item={p} onOpen={onOpen} />
+          {projects.map((p, i) => (
+            <WorkCard key={p.id} item={p} index={i} onOpen={onOpen} />
           ))}
         </motion.div>
       </div>

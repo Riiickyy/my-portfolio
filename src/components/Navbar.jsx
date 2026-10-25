@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { MenuIcon, CloseIcon } from './Icons.jsx'
 
 const links = [
+  { href: '#services', label: 'Services' },
   { href: '#projects', label: 'Projects' },
   { href: '#case-studies', label: 'Case Studies' },
   { href: '#testimonials', label: 'Testimonials' },

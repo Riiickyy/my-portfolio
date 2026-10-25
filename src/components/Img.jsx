@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// Shows the image, or a purple gradient with a label if the file is missing.
+// Shows the image, or a dark gradient with a label if the file is missing.
 // Lets the site look finished before real screenshots are added.
 export default function Img({ src, alt, label, ...rest }) {
   const [failed, setFailed] = useState(!src)

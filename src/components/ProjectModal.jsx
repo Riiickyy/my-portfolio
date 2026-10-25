@@ -40,7 +40,7 @@ export default function ProjectModal({ item, onClose }) {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="modal"
+            className="modal zone--paper"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"

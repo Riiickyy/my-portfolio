@@ -5,33 +5,33 @@ import { site } from '../data/site.js'
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 }
 
 const item = {
   hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.2, 0.8, 0.2, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.2, 0.8, 0.2, 1] } },
 }
 
 const badges = [
-  { icon: <CodeIcon />, title: 'Web Developer', sub: 'Custom builds', cls: 'badge--1', delay: 0.9 },
-  { icon: <LayoutIcon />, title: 'Landing Pages', sub: 'Built to convert', cls: 'badge--2', delay: 1.05 },
+  { icon: <CodeIcon />, title: 'Web Developer', sub: 'Custom builds', cls: 'badge--1', delay: 1.3 },
+  { icon: <LayoutIcon />, title: 'Landing Pages', sub: 'Built to convert', cls: 'badge--2', delay: 1.45 },
   {
     icon: <span className="badge__num">{site.experience}</span>,
     title: 'Years',
     sub: 'Experience',
     cls: 'badge--3',
-    delay: 1.2,
+    delay: 1.6,
   },
 ]
 
 export default function Hero() {
   return (
-    <section className="hero" id="top">
+    <section className="hero zone--night" id="top">
       <div className="container hero__grid">
         <motion.div variants={container} initial="hidden" animate="show">
-          <motion.span variants={item} className="eyebrow">
-            {site.name} · {site.role}
+          <motion.span variants={item} className="eyebrow hero__eyebrow">
+            <span className="pulse" aria-hidden /> {site.name} · {site.role}
           </motion.span>
 
           <h1 className="hero__title">
@@ -61,27 +61,23 @@ export default function Hero() {
           </motion.p>
         </motion.div>
 
+        {/* The arch frame echoes the neon arch behind Ricky in the photo */}
         <div className="hero__visual">
           <motion.div
-            className="hero__ring"
-            initial={{ opacity: 0, rotate: -30 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            transition={{ duration: 1.2, delay: 0.3 }}
-          />
-          <motion.div
-            className="hero__circle"
-            initial={{ scale: 0.6, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1], delay: 0.15 }}
+            className="hero__glow"
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.4, delay: 0.2 }}
           />
           <motion.div
             className="hero__portrait"
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
+            initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
+            animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+            transition={{ duration: 1.1, delay: 0.35, ease: [0.7, 0, 0.2, 1] }}
           >
-            <Img src={site.portrait} alt={`Portrait of ${site.name}`} label="Add portrait.jpg" />
+            <Img src={site.portrait} alt={`Portrait of ${site.name}`} label="Add hero.jpg" loading="eager" />
           </motion.div>
+          <span className="hero__arch-line" aria-hidden />
 
           {badges.map((b, i) => (
             <motion.div

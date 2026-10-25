@@ -6,19 +6,28 @@ import { ArrowUpRight } from './Icons.jsx'
 // Use on the grid that wraps the cards so they appear one after another
 export const gridVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
+  show: { transition: { staggerChildren: 0.1 } },
 }
 
-const variants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.2, 0.8, 0.2, 1] } },
+const ease = [0.2, 0.8, 0.2, 1]
+
+// Each section enters differently: projects rise up, case studies scale in
+const entrances = {
+  up: {
+    hidden: { opacity: 0, y: 48 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+  },
+  scale: {
+    hidden: { opacity: 0, scale: 0.88 },
+    show: { opacity: 1, scale: 1, transition: { duration: 0.7, ease } },
+  },
 }
 
 // One card for both projects and case studies. The media box shares a
 // layoutId with the modal so it grows smoothly into the popup.
-export default function WorkCard({ item, onOpen }) {
+export default function WorkCard({ item, index = 0, enter = 'up', onOpen }) {
   return (
-    <motion.article className="card" variants={variants} whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
+    <motion.article className="card" variants={entrances[enter]} whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
       <motion.div
         className={`card__media ${item.fit === 'contain' ? 'media--contain' : ''}`}
         layoutId={`media-${item.id}`}
@@ -28,7 +37,10 @@ export default function WorkCard({ item, onOpen }) {
       </motion.div>
 
       <div className="card__body">
-        {item.kicker && <span className="card__kicker">{item.kicker}</span>}
+        <span className="card__meta">
+          <span className="card__index">{String(index + 1).padStart(2, '0')}</span>
+          {item.kicker && <span className="card__kicker">{item.kicker}</span>}
+        </span>
         {item.stat && (
           <span className="stat">
             {item.stat.text ?? <CountUp {...item.stat} />}
